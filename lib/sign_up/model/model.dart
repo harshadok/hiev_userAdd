@@ -7,19 +7,19 @@ class Model {
   @HiveField(0)
   int? id;
   @HiveField(1)
-  final String name;
+  final String firstName;
   @HiveField(2)
-  final String pass;
+  final String lastName;
   @HiveField(3)
-  final String email;
+  final String Phone;
   @HiveField(4)
-  final String phone;
+  final String age;
 
   Model({
     this.id,
-    required this.name,
-    required this.pass,
-    required this.email,
-    required this.phone,
+    required this.firstName,
+    required this.lastName,
+    required this.Phone,
+    required this.age,
   });
 }

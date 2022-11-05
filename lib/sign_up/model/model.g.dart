@@ -18,10 +18,10 @@ class StudentModelAdapter extends TypeAdapter<Model> {
     };
     return Model(
       id: fields[0] as int?,
-      name: fields[1] as String,
-      pass: fields[2] as String,
-      email: fields[3] as String,
-      phone: fields[4] as String,
+      firstName: fields[1] as String,
+      lastName: fields[2] as String,
+      Phone: fields[3] as String,
+      age: fields[4] as String,
     );
   }
 
@@ -32,13 +32,13 @@ class StudentModelAdapter extends TypeAdapter<Model> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.firstName)
       ..writeByte(2)
-      ..write(obj.pass)
+      ..write(obj.lastName)
       ..writeByte(3)
-      ..write(obj.email)
+      ..write(obj.Phone)
       ..writeByte(4)
-      ..write(obj.phone);
+      ..write(obj.age);
   }
 
   @override

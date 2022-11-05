@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:login_app_pooni/sign_up/model/model.dart';
 import 'package:login_app_pooni/sign_up/view/sign_up.dart';
 import 'package:login_app_pooni/sign_up/view_model/sign_up_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
+  WidgetsFlutterBinding.ensureInitialized();
+  if (!Hive.isAdapterRegistered(StudentModelAdapter().typeId)) {
+    Hive.registerAdapter(StudentModelAdapter());
+  }
   runApp(const MyApp());
 }
 
@@ -31,7 +38,7 @@ class MyApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.amber,
         ),
         home: const SignUp(),
       ),

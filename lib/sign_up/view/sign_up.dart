@@ -34,7 +34,7 @@ class SignUp extends StatelessWidget {
                   ],
                   borderRadius: BorderRadius.circular(30)),
               child: TextFormField(
-                controller: authProvider.nameController,
+                controller: authProvider.firsName,
                 decoration: InputDecoration(
                     hintText: "First Name",
                     prefixIcon: const Icon(
@@ -65,7 +65,7 @@ class SignUp extends StatelessWidget {
                   ],
                   borderRadius: BorderRadius.circular(30)),
               child: TextFormField(
-                controller: authProvider.phonenumber,
+                controller: authProvider.lstName,
                 decoration: InputDecoration(
                     hintText: "Last Name",
                     prefixIcon: const Icon(
@@ -99,7 +99,7 @@ class SignUp extends StatelessWidget {
                 onChanged: (String values) {
                   authProvider.onPasswordChanged(values);
                 },
-                controller: authProvider.email,
+                controller: authProvider.phone,
                 decoration: InputDecoration(
                     hintText: "Phone Number",
                     prefixIcon: const Icon(
@@ -116,37 +116,48 @@ class SignUp extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30))),
               ),
             ),
+            const SizedBox(
+              height: 30,
+            ),
             EmailRegWidget(provider: authProvider),
             const SizedBox(
               height: 30,
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: 10,
-                        offset: const Offset(1, 1),
-                        color: Colors.grey.withOpacity(0.5))
-                  ],
-                  borderRadius: BorderRadius.circular(30)),
-              child: TextFormField(
-                controller: authProvider.password,
-                decoration: InputDecoration(
-                    hintText: "Age",
-                    prefixIcon: const Icon(
-                      Icons.password,
-                      color: Colors.orange,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 1.0)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(width: 1.0, color: Colors.white),
-                        borderRadius: BorderRadius.circular(30))),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text(
+                  "Select Your Age",
+                  style: TextStyle(fontSize: 18),
+                ),
+                DropdownButton<String>(
+                  focusColor: Colors.white,
+                  value: authProvider.chosenValue,
+                  //elevation: 5,
+                  style: const TextStyle(color: Colors.white),
+                  iconEnabledColor: Colors.black,
+                  items: authProvider.age
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    );
+                  }).toList(),
+                  hint: const Text(
+                    "Please choose a Age",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  onChanged: (String? value) {
+                    authProvider.slectedAge(value!);
+                  },
+                ),
+              ],
             ),
             const SizedBox(
               height: 30,
@@ -156,28 +167,6 @@ class SignUp extends StatelessWidget {
                   authProvider.adDetails(context);
                 },
                 child: const Text("Sign Up")),
-            GestureDetector(
-              onTap: (() {
-                Navigator.pop(context);
-              }),
-              child: RichText(
-                text: const TextSpan(
-                    text: "Already have an account?",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: "Login",
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ]),
-              ),
-            )
           ],
         ),
       )),
