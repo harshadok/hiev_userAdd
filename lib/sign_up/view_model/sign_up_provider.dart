@@ -101,18 +101,18 @@ class SignUpProvider extends ChangeNotifier {
 
   Future<void> addStudent(Model value) async {
     final studentDb = await Hive.openBox<Model>('student_db');
-    final id = await studentDb.add(value);
-    value.id = id;
+    final idd = await studentDb.add(value);
+    value.id = idd;
     personList.add(value);
     notifyListeners();
-    studentDb.put(value.id, value);
-    notifyListeners();
     print(personList.length);
-    print("personList.first.name : ${personList.first.firstName}");
+    //print("personList.first.name : ${personList.first.firstName}");
   }
 
   Future<void> deletestudent(int id) async {
     final studentDb = await Hive.openBox<Model>('student_db');
-    await studentDb.deleteAt(id);
+    await studentDb.delete(id);
+    personList.removeAt(id);
+    notifyListeners();
   }
 }

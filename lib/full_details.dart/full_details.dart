@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../sign_up/model/model.dart';
 
+// ignore: must_be_immutable
 class FullDetails extends StatelessWidget {
   FullDetails({super.key, required this.data});
 
